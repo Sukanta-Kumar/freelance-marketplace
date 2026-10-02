@@ -1,6 +1,5 @@
-package com.marketplace.bid.dto;
+package com.marketplace.bid.client;
 
-import com.marketplace.bid.entity.ProjectStatus;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -75,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService{
         String currentRole = securityUtil.getCurrentUserRole();
         // CLIENT can update only their own project
         // ADMIN can update any project
-        if("CLIENT".equals(currentRole) && !projectFromDb.getClientId().equals(currentUserId)){
+        if(!currentRole.equals("CLIENT") && !projectFromDb.getClientId().equals(currentUserId)){
             throw new ApiException("You are Not Allowed to Update this project");
         }
 
@@ -95,9 +95,10 @@ public class ProjectServiceImpl implements ProjectService{
         String currentRole = securityUtil.getCurrentUserRole();
         // CLIENT can delete only their own project
         // ADMIN can delete any project
-        if("CLIENT".equals(currentRole) && !projectFromDb.getClientId().equals(currentUserId)){
+        if(!currentRole.equals("CLIENT") && !projectFromDb.getClientId().equals(currentUserId)){
             throw new ApiException("You are Not Allowed to Delete this project");
         }
+
 
         projectRepository.delete(projectFromDb);
     }

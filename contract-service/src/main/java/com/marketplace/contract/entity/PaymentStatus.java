@@ -1,4 +1,7 @@
 package com.marketplace.contract.entity;
 
-public class PaymentStatus {
+public enum PaymentStatus {
+    PENDING,
+    SUCCESS,
+    FAILED
 }

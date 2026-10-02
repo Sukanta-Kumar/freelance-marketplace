@@ -1,4 +1,9 @@
 package com.marketplace.contract.exception;
 
-public class ApiException {
+import lombok.Getter;
+
+public class ApiException extends RuntimeException{
+    public ApiException(String message) {
+        super(message);
+    }
 }

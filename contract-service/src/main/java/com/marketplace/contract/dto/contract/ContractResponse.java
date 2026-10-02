@@ -1,4 +1,4 @@
-package com.marketplace.contract.dto;
+package com.marketplace.contract.dto.contract;
 
 import com.marketplace.contract.entity.ContractStatus;
 import lombok.*;

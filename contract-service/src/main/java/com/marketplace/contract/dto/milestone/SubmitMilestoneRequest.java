@@ -1,4 +1,4 @@
-package com.marketplace.contract.dto;
+package com.marketplace.contract.dto.milestone;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

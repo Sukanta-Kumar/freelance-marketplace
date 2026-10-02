@@ -1,4 +1,8 @@
 package com.marketplace.bid.entity;
 
-public class BidStatus {
+public enum BidStatus {
+    PENDING,
+    ACCEPTED,
+    REJECTED,
+    WITHDRAWN
 }

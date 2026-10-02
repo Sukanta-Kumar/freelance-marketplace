@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 public class JwtUtils {
-    @Value("${app.jwt.secret}")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     // Get JWT from Authorization Header

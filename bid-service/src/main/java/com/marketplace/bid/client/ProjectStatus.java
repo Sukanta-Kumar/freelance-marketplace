@@ -1,4 +1,4 @@
-package com.marketplace.bid.entity;
+package com.marketplace.bid.client;
 
 public enum ProjectStatus {
     OPEN,

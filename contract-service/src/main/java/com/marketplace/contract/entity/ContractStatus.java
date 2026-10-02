@@ -1,4 +1,7 @@
 package com.marketplace.contract.entity;
 
-public class ContractStatus {
+public enum ContractStatus {
+    ACTIVE,
+    COMPLETED,
+    CANCELLED
 }
