@@ -5,9 +5,9 @@ spring:
   application:
     name: project-service
   datasource:
-    url: jdbc:mysql://localhost:3306/project_db?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/project_db
     username: root
-    password: yourpassword
+    password: Raja@123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -26,3 +26,8 @@ eureka:
 
 jwt:
   secret: this-is-a-fresher-project-jwt-secret-key-change-me-32chars+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.marketplace.project.security: DEBUG
