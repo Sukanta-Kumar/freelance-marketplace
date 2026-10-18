@@ -26,7 +26,7 @@ public class ContractController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ContractResponse> getContractById(@PathVariable Long id){
-        return ResponseEntity.ok(contractService.getCotractById(id));
+        return ResponseEntity.ok(contractService.getContractById(id));
     }
 
     @GetMapping("/client/{clientId}")

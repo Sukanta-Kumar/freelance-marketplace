@@ -40,7 +40,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                     userId,
                     null,
                     Collections.singletonList(
-                            new SimpleGrantedAuthority("Role_" + role)
+                            new SimpleGrantedAuthority("ROLE_" + role)
                     )
             );
 
