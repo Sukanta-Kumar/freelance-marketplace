@@ -26,3 +26,8 @@ eureka:
 
 jwt:
   secret: this-is-a-fresher-project-jwt-secret-key-change-me-32chars+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.marketplace.project.security: DEBUG

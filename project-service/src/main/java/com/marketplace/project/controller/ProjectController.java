@@ -7,6 +7,7 @@ import com.marketplace.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @PostMapping
-//    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<ProjectResponse> addProject(@RequestBody ProjectRequest projectRequest){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -33,26 +34,24 @@ public class ProjectController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProjectResponse> getProjectById(@PathVariable Long id){
-        return ResponseEntity
-                .status(HttpStatus.FOUND)
-                .body(projectService.getProjectById(id));
+        return ResponseEntity.ok(projectService.getProjectById(id));
     }
 
     @PutMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<ProjectResponse> updateProjectById(@PathVariable Long id, @RequestBody ProjectRequest projectRequest){
         return ResponseEntity.ok(projectService.updateProject(projectRequest,id));
     }
 
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id){
         projectService.deleteProject(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}/status")
-//    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<ProjectResponse> updateStatus(@PathVariable Long id, @RequestBody UpdateStatusRequest updateStatusRequest){
         return ResponseEntity.ok(projectService.updateStatus(id,updateStatusRequest));
     }
