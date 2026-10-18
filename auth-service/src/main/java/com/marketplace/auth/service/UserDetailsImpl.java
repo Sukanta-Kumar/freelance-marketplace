@@ -1,6 +1,7 @@
 package com.marketplace.auth.service;
 
 import com.marketplace.auth.entity.User;
+import com.marketplace.auth.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,5 +29,15 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return user.getEmail();
+    }
+    public Long getId() {
+        return user.getId();
+    }
+
+    public String getEmail() {
+        return user.getEmail();
+    }
+    public Role getRole(){
+        return user.getRole();
     }
 }

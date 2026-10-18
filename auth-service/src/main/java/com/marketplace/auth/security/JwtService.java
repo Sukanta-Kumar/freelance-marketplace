@@ -1,10 +1,12 @@
 package com.marketplace.auth.security;
 
 
+import com.marketplace.auth.service.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -28,14 +30,17 @@ public class JwtService {
     }
 
     // Generate JWT token for the logged-in user
-    public String generateToken(UserDetails userDetails) {
+    // Here used "UserDetails" class because we want to Generate JWT token for the user during registration or login.
+    public String generateJwtToken(UserDetails userDetails) {
+        UserDetailsImpl userDetailsImpl =
+                (UserDetailsImpl) userDetails;
 
         return Jwts.builder()
-                .subject(userDetails.getUsername())
+                .subject(userDetailsImpl.getEmail())
+                .claim("userId", userDetailsImpl.getId())
+                .claim("role", userDetailsImpl.getRole().name())
                 .issuedAt(new Date())
-                .expiration(
-                        new Date(System.currentTimeMillis() + jwtExpiration)
-                )
+                .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSigningKey())
                 .compact();
     }
@@ -74,88 +79,4 @@ public class JwtService {
 
         return expirationDate.before(new Date());
     }
-/*
-    @Value("${jwt.secret}")
-    private String secret;
-
-    @Value("${jwt.expiration}")
-    private long expiration;
-
-
-    // 1. Extract JWT token from Authorization header
-    public String getJWTfromHeader(HttpServletRequest request) {
-
-        String authHeader = request.getHeader("Authorization");
-
-        if (authHeader != null &&
-                authHeader.startsWith("Bearer ")) {
-
-            return authHeader.substring(7);
-        }
-
-        return null;
-    }
-
-
-    // 2. Generate JWT token
-    public String generateJwtToken(Authentication authentication) {
-
-        UserDetailsImpl userDetails =
-                (UserDetailsImpl) authentication.getPrincipal();
-
-        Date now = new Date();
-
-        Date expiryDate =
-                new Date(now.getTime() + expiration);
-
-        return Jwts.builder()
-                .subject(userDetails.getUsername())
-                .issuedAt(now)
-                .expiration(expiryDate)
-                .signWith(getSigningKey())
-                .compact();
-    }
-
-
-    // 3. Extract email from JWT token
-    public String getEmailFromJwtToken(String token) {
-
-        Claims claims = Jwts.parser()
-                .verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-
-        return claims.getSubject();
-    }
-
-
-    // 4. Validate JWT token
-    public boolean validateJwtToken(String token) {
-
-        try {
-
-            Jwts.parser()
-                    .verifyWith(getSigningKey())
-                    .build()
-                    .parseSignedClaims(token);
-
-            return true;
-
-        } catch (Exception e) {
-
-            return false;
-        }
-    }
-
-
-    // 5. Get signing key
-    private SecretKey getSigningKey() {
-
-        return Keys.hmacShaKeyFor(
-                secret.getBytes(StandardCharsets.UTF_8)
-        );
-    }
-
- */
 }

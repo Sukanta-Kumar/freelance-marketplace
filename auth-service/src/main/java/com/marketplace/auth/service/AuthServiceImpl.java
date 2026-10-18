@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
         UserDetails userDetails = new UserDetailsImpl(savedUser);
 
-        String token = jwtService.generateToken(userDetails);
+        String token = jwtService.generateJwtToken(userDetails);
 
         // Convert User entity to AuthResponse
         return userMapper.toAuthResponse(savedUser, token);
@@ -70,89 +70,8 @@ public class AuthServiceImpl implements AuthService {
         }
 
         UserDetails userDetails = new UserDetailsImpl(user);
-        String token = jwtService.generateToken(userDetails);
+        String token = jwtService.generateJwtToken(userDetails);
 
         return userMapper.toAuthResponse(user, token);
     }
 }
-
-
-/*
-    // REGISTER
-    @Override
-    public AuthResponse register(RegisterRequest request) {
-
-        // 1. Check whether email already exists
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
-
-        // 2. Create User entity
-        User user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .password(
-                        passwordEncoder.encode(
-                                request.getPassword()
-                        )
-                )
-                .role(request.getRole())
-                .build();
-
-        // 3. Save user
-        User savedUser = userRepository.save(user);
-
-        // 4. Generate JWT token
-        String token =
-                jwtService.generateJwtToken((Authentication) savedUser);
-
-
-        // 5. Convert User → AuthResponse
-        return userMapper.toAuthResponse(
-                savedUser,
-                token
-        );
-    }
-
-
-    // LOGIN
-    @Override
-    public AuthResponse login(LoginRequest request) {
-
-        // 1. Find user by email
-        User user = userRepository
-                .findByEmail(request.getEmail())
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Invalid email or password"
-                        )
-                );
-
-
-        // 2. Verify password
-        if (!passwordEncoder.matches(
-                request.getPassword(),
-                user.getPassword())) {
-
-            throw new RuntimeException(
-                    "Invalid email or password"
-            );
-        }
-
-
-        // 3. Generate JWT token
-        String token =
-                jwtService.generateJwtToken((Authentication) user);
-
-
-        // 4. Convert User → AuthResponse
-        return userMapper.toAuthResponse(
-                user,
-                token
-        );
-    }
-}
-
-
- */

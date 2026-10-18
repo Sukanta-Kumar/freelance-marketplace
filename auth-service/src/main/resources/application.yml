@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/auth_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
-    password: Swayam@73
+    password: Raja@123
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -20,41 +20,50 @@ spring:
       hibernate:
         format_sql: true
 
-#  security:
-#    user:
-#      name: admin
-#      password: admin
-
 # JWT Configuration
+
 jwt:
-  secret: your-super-secret-jwt-key-change-this-in-production
+  secret: this-is-a-fresher-project-jwt-secret-key-change-me-32chars+
   expiration: 86400000
 
-# Eureka Client - if you are using Service Discovery
+# Eureka Client
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
+      register-with-eureka: true
+      fetch-registry: true
 
   instance:
     prefer-ip-address: true
 
-## Actuator
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: health,info
-#
-#  endpoint:
-#    health:
-#      show-details: always
-#
-#logging:
-#  level:
-#    org.springframework.security: INFO
-#    org.hibernate.SQL: DEBUG
-#    org.hibernate.orm.jdbc.bind: TRACE
+# Actuator
 
+# management:
+
+# endpoints:
+
+# web:
+
+# exposure:
+
+# include: health,info
+
+# endpoint:
+
+# health:
+
+# show-details: always
+
+# Logging
+
+# logging:
+
+# level:
+
+# org.springframework.security: INFO
+
+# org.hibernate.SQL: DEBUG
+
+# org.hibernate.orm.jdbc.bind: TRACE
