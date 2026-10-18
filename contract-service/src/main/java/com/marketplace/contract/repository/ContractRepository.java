@@ -11,4 +11,8 @@ public interface ContractRepository extends JpaRepository<Contract,Long> {
     List<Contract> findByClientId(Long clientId);
 
     List<Contract> findByFreelancerId(Long freelancerId);
+
+    boolean existsByBidId(Long bidId);
+
+    java.util.Optional<Contract> findByBidId(Long bidId);
 }

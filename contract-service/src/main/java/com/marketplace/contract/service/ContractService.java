@@ -10,7 +10,7 @@ public interface ContractService {
 
     ContractResponse createContract(@Valid CreateContractRequest request);
 
-    ContractResponse getCotractById(Long id);
+    ContractResponse getContractById(Long id);
 
     List<ContractResponse> getContractsByClientId(Long clientId);
 

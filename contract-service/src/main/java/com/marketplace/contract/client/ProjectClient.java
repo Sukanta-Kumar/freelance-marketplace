@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "project-service")
 public interface ProjectClient {
     @GetMapping("/api/projects/{id}")
-    ProjectResponse getProjectById(@PathVariable Long id);
+    ProjectResponse getProjectById(@PathVariable("id") Long id);
 
     @PatchMapping("/api/projects/{id}/status")
     ProjectResponse updateStatus(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @RequestBody UpdateProjectStatusRequest updateStatusRequest
     );
 }

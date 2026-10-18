@@ -19,7 +19,7 @@ public class SecurityUtil {
                 .iterator()
                 .next()
                 .getAuthority()
-                .replace("Role_", "");
+                .replace("ROLE_", "");
     }
 }
 

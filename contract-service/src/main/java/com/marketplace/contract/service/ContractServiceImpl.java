@@ -27,8 +27,8 @@ public class ContractServiceImpl implements ContractService{
     @Override
     @Transactional
     public ContractResponse createContract(CreateContractRequest request) {
-        if (contractRepository.findById(request.getBidId()).isPresent()){
-            throw new ApiException("A contract already exists for bid ID: \" + request.getBidId()");
+        if (contractRepository.existsByBidId(request.getBidId())){
+            throw new ApiException("A contract already exists for bid ID: " + request.getBidId());
         }
         Contract contract = contractMapper.toEntity(request);
         contract = contractRepository.save(contract);
@@ -42,7 +42,7 @@ public class ContractServiceImpl implements ContractService{
     }
 
     @Override
-    public ContractResponse getCotractById(Long id) {
+    public ContractResponse getContractById(Long id) {
         Contract contract = contractRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contract","contractId",id));
         return contractMapper.toResponse(contract);
@@ -89,6 +89,6 @@ public class ContractServiceImpl implements ContractService{
         contract.setStatus(ContractStatus.CANCELLED);
         Contract updatedContract = contractRepository.save(contract);
 
-        return contractMapper.toResponse(contract);
+        return contractMapper.toResponse(updatedContract);
     }
 }
