@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Quiet Utility - Neutral scale + Burnt Orange Accent */
+    --background: 240 7% 99%;         /* #FBFBFC */
+    --surface: 0 0% 100%;            /* #FFFFFF */
+    --subtle: 240 5% 96%;            /* #F4F4F5 */
+    --ink: 240 6% 7%;                /* #111113 high-contrast near-black */
+    --muted: 240 5% 96%;             /* #F4F4F5 */
+    --muted-foreground: 240 4% 46%;  /* #71717A WCAG AA */
+    --border: 240 6% 90%;            /* #E4E4E7 hairline border */
+    
+    /* Buttons: Primary is near-black, NOT brand color */
+    --primary: 240 6% 7%;            /* #111113 */
+    --primary-hover: 240 6% 16%;     /* #26262B */
+    --primary-foreground: 0 0% 100%;
+
+    /* Single accent color used sparingly: Burnt Orange */
+    --accent: 21 90% 48%;            /* #E8590C */
+    --accent-hover: 21 95% 42%;      /* #D9480F */
+    --accent-foreground: 0 0% 100%;
+
+    /* Secondary neutral button / pill */
+    --secondary: 240 5% 96%;         /* #F4F4F5 */
+    --secondary-hover: 240 5% 91%;   /* #E7E7E9 */
+    --secondary-foreground: 240 6% 7%;
+
+    --destructive: 0 84% 45%;        /* #DC2626 */
+    --destructive-foreground: 0 0% 100%;
+    --ring: 21 90% 48%;              /* Focus ring uses accent */
+    --radius: 6px;
+  }
+
+  .dark {
+    /* Quiet Utility - Dark Mode */
+    --background: 240 8% 5%;         /* #0C0C0E */
+    --surface: 240 7% 8%;            /* #141417 */
+    --subtle: 240 7% 12%;            /* #1C1C20 */
+    --ink: 240 5% 93%;               /* #EDEDEF */
+    --muted: 240 7% 12%;             /* #1C1C20 */
+    --muted-foreground: 240 2% 57%;  /* #8E8E93 */
+    --border: 240 4% 15%;            /* #232326 */
+
+    /* Buttons: Primary is near-white in dark mode */
+    --primary: 240 5% 93%;           /* #EDEDEF */
+    --primary-hover: 240 5% 85%;     /* #D8D8DC */
+    --primary-foreground: 240 6% 7%;
+
+    /* Single accent color in dark mode */
+    --accent: 24 95% 50%;            /* #F76707 */
+    --accent-hover: 24 95% 44%;      /* #E8590C */
+    --accent-foreground: 0 0% 100%;
+
+    --secondary: 240 7% 12%;         /* #1C1C20 */
+    --secondary-hover: 240 7% 16%;   /* #27272D */
+    --secondary-foreground: 240 5% 93%;
+
+    --destructive: 0 84% 60%;        /* #EF4444 */
+    --destructive-foreground: 0 0% 100%;
+    --ring: 24 95% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-ink antialiased selection:bg-accent/15 selection:text-ink;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    @apply tracking-tight font-semibold;
+  }
+}
+
+/* Tabular numerals for money & statistics */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle transitions only */
+button, a, input, select, textarea {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 120ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
